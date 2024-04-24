@@ -1,0 +1,14 @@
+server:
+  port: 8080
+
+spring:
+  datasource:
+    url: jdbc:postgresql://10.91.235.109:5432/uf6
+    username: postgres
+    password: postgres
+
+
+  jpa:
+    hibernate:
+      ddl-auto: update # Hibernate crearà noves taules si no existeixen i les actualitzarà si estan desactualitzades
+    open-in-view: false # la sessió de Hibernate es tancarà abans de renderitzar la vista.
