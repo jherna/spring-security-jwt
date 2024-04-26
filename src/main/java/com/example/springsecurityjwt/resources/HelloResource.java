@@ -1,4 +1,4 @@
-package com.example.springsecurityjwt;
+package com.example.springsecurityjwt.resources;
 
 import com.example.springsecurityjwt.models.AuthenticationRequest;
 import com.example.springsecurityjwt.models.AuthenticationResponse;

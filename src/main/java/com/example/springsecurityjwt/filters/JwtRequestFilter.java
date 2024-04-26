@@ -1,6 +1,6 @@
 package com.example.springsecurityjwt.filters;
 
-import com.example.springsecurityjwt.services.MyUserDetailsService;
+import com.example.springsecurityjwt.services.UserService;
 import com.example.springsecurityjwt.util.JwtUtil;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
@@ -20,7 +20,7 @@ import java.io.IOException;
 public class JwtRequestFilter extends OncePerRequestFilter {
 
     @Autowired
-    private MyUserDetailsService myUserDetailsService;
+    private UserService userService;
     @Autowired
     private JwtUtil jwtUtil;
 
@@ -37,7 +37,7 @@ public class JwtRequestFilter extends OncePerRequestFilter {
         }
 
         if(email != null && SecurityContextHolder.getContext().getAuthentication() == null) {
-            UserDetails userDetails = this.myUserDetailsService.loadUserByUsername(email);
+            UserDetails userDetails = this.userService.loadUserByUsername(email);
 
             if(jwtUtil.validateToken(jwt,userDetails)) {
                 UsernamePasswordAuthenticationToken upat = new UsernamePasswordAuthenticationToken(

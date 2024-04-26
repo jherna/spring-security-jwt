@@ -1,9 +1,8 @@
 package com.example.springsecurityjwt.security;
 
 import com.example.springsecurityjwt.filters.JwtRequestFilter;
-import com.example.springsecurityjwt.services.MyUserDetailsService;
+import com.example.springsecurityjwt.services.UserService;
 import com.example.springsecurityjwt.util.JwtAuthenticationEntryPoint;
-import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -12,7 +11,6 @@ import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
-import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
@@ -32,7 +30,7 @@ import java.util.List;
 public class SecurityConfigurer  {
 
     @Autowired
-    MyUserDetailsService myUserDetailsService;
+    UserService userService;
 
     @Autowired
     private JwtAuthenticationEntryPoint point;
@@ -53,7 +51,7 @@ public class SecurityConfigurer  {
     @Bean
     public AuthenticationProvider authenticationProvider() {
         DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
-        provider.setUserDetailsService(myUserDetailsService);
+        provider.setUserDetailsService(userService);
         provider.setPasswordEncoder(passwordEncoder());
         return provider;
     }

@@ -1,5 +1,6 @@
-package com.example.springsecurityjwt;
+package com.example.springsecurityjwt.entities;
 
+import com.example.springsecurityjwt.dtos.UserDto;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
@@ -11,7 +12,7 @@ import lombok.Data;
 @Data
 @Entity
 @Table(name = "users")
-public class UserEntity {
+public class User {
     @Id
     private Integer id;
     private String email;
@@ -19,14 +20,21 @@ public class UserEntity {
     @Column(name = "full_name")
     private String fullName;
 
-    public UserEntity(Integer id, String email, String password, String fullName) {
+    public User(Integer id, String email, String password, String fullName) {
         this.id = id;
         this.email = email;
         this.password = password;
         this.fullName = fullName;
     }
 
-    public UserEntity() {
+    public User() {
 
+    }
+
+    public User(UserDto userDto) {
+        this.id = userDto.getId();
+        this.email = userDto.getEmail();
+        this.password = userDto.getPassword();
+        this.fullName = userDto.getFullName();
     }
 }
