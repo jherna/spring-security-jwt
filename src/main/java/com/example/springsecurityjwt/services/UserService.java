@@ -20,11 +20,18 @@ public class UserService implements UserDetailsService {
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
         //Buscar a la bd l'usuari i el password
         User user = userDAO.findByEmail(email);
+        System.out.println(user);
+        //MyUserDetails myUserDetails = new MyUserDetails(user);
+        //return myUserDetails;
         return new org.springframework.security.core.userdetails.User(user.getEmail(),user.getPassword(),new ArrayList<>());
     }
 
     public List<User> readAllUsers() {
         return userDAO.findAll();
+    }
+
+    public User addUser(User user) {
+        return userDAO.save(user);
     }
 
 

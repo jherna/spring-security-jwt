@@ -64,7 +64,9 @@ public class SecurityConfigurer  {
                 .authorizeHttpRequests(authManagerRequestMatcherRegistry ->
                         authManagerRequestMatcherRegistry
                                 .requestMatchers("/auth/**").permitAll()
+                                .requestMatchers("/login/**").permitAll()
                                 .anyRequest().authenticated())
+                //.formLogin(p -> p.usernameParameter("email"))
                 .httpBasic(Customizer.withDefaults())
                 .sessionManagement(httpSecurityConfigurer -> httpSecurityConfigurer
                         .sessionCreationPolicy(SessionCreationPolicy.STATELESS))
