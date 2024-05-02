@@ -38,6 +38,7 @@ public class UserService implements UserDetailsService {
 
 
     public User getUserById(Integer id) {
+        //TODO revisar i ampliar la manipulació d'errors en totes les capes
         Optional<User> user = userDAO.findById(id);
         return user.orElseThrow(() -> new UserNotFoundException("User with id " + id));
     }
