@@ -28,5 +28,10 @@ public class UserResource {
         return ResponseEntity.ok(userController.addUser(user));
     }
 
+    @GetMapping("/{id}")
+    private ResponseEntity<UserDto> user(@PathVariable Integer id) {
+        return new ResponseEntity<>(userController.getUserById(id), HttpStatus.OK);
+    }
+
 
 }

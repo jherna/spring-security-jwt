@@ -1,6 +1,7 @@
 package com.example.springsecurityjwt.services;
 
 import com.example.springsecurityjwt.entities.User;
+import com.example.springsecurityjwt.exceptions.UserNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -9,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class UserService implements UserDetailsService {
@@ -35,4 +37,8 @@ public class UserService implements UserDetailsService {
     }
 
 
+    public User getUserById(Integer id) {
+        Optional<User> user = userDAO.findById(id);
+        return user.orElseThrow(() -> new UserNotFoundException("User with id " + id));
+    }
 }

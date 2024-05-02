@@ -1,7 +1,9 @@
 package com.example.springsecurityjwt.exceptions;
 
-public class UserNotFoundException extends RuntimeException{
-    public UserNotFoundException(String message, Throwable cause) {
-        super(message, cause);
+public class UserNotFoundException extends RuntimeException {
+    private static final String DESCRIPTION = "User Not Found Exception (400)";
+
+    public UserNotFoundException(String detail) {
+        super(DESCRIPTION + ". " + detail);
     }
 }

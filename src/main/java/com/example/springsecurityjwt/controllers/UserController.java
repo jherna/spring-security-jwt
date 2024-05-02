@@ -3,6 +3,7 @@ package com.example.springsecurityjwt.controllers;
 
 import com.example.springsecurityjwt.dtos.UserDto;
 import com.example.springsecurityjwt.entities.User;
+import com.example.springsecurityjwt.exceptions.UserNotFoundException;
 import com.example.springsecurityjwt.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -33,5 +34,9 @@ public class UserController {
         u.setPassword(pass);
 
         return new UserDto(userService.addUser(u));
+    }
+
+    public UserDto getUserById(Integer id) {
+        return new UserDto(userService.getUserById(id));
     }
 }

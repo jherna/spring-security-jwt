@@ -57,7 +57,6 @@ public class SecurityConfigurer  {
     }
 
 
-
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.csrf(AbstractHttpConfigurer::disable)
@@ -66,7 +65,10 @@ public class SecurityConfigurer  {
                                 .requestMatchers("/auth/**").permitAll()
                                 .requestMatchers("/login/**").permitAll()
                                 .anyRequest().authenticated())
-                //.formLogin(p -> p.usernameParameter("email"))
+                //.formLogin(flc -> flc//.loginPage("/login")
+                //                      .usernameParameter("email")
+                //                      .passwordParameter("password")
+                //                      .permitAll())
                 .httpBasic(Customizer.withDefaults())
                 .sessionManagement(httpSecurityConfigurer -> httpSecurityConfigurer
                         .sessionCreationPolicy(SessionCreationPolicy.STATELESS))
